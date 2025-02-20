@@ -11,25 +11,26 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Column(columnDefinition = "CHAR(36)")
+    private UUID uuid;
 
-    @Column(nullable = false, unique = true)
-    private String RealId;
+    @Column(nullable = false, unique = true ,length = 30)
+    private String id; //로그인 할 떄 쓰는 id
 
     @Column(nullable = false)
-    private String password;
+    @Setter
+    private String pwd; //비번
 
     @Column(nullable = false,unique = true)
-    private String email;
+    private String email; //이메일
 
-    @Column(nullable = false , unique = true)
-    private String nickname;
+    @Setter
+    @Column(nullable = false , length = 20)
+    private String nickname; //닉네임
 }
