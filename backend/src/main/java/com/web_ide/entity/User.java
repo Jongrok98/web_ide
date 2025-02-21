@@ -34,9 +34,4 @@ public class User {
     @Column(nullable = false, length = 20)
     private String nickname; //닉네임
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SocialAccount> socialAccounts = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Project> projects = new ArrayList<>();
 }
