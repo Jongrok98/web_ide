@@ -17,10 +17,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uuid;
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 30)
-    private String id; //로그인 할 떄 쓰는 id
+    private String loginId; //로그인 할 떄 쓰는 id
 
     @Setter
     @Column(nullable = false)
