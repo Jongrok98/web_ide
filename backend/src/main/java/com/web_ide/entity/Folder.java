@@ -16,23 +16,23 @@ import java.util.UUID;
 @Table(name = "folders")
 public class Folder {
 
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(columnDefinition = "CHAR(36)")
-    private UUID uuid;
+    private Long id;
 
     @Column(nullable = false, length = 64)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id",nullable = false)
     private Project project;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", nullable = false)
     private Folder parent;
 
-    @Column(name = "relative_path", columnDefinition = "TEXT")
+    @Column(name = "relative_path", length = 255)
     private String relativePath;
 
     @CreationTimestamp

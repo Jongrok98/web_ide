@@ -18,22 +18,18 @@ import java.util.UUID;
 public class File {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "CHAR(36)")
-    private UUID uuid;
+    private Long id;
 
     @Column(nullable = false, length = 64)
     private String name;
 
-    @Column(name = "data", columnDefinition = "TEXT")
-    private String data;
+    @Column(name = "file_path", length = 255, nullable = false)
+    private String filePath;
 
     @Column(name ="extension",nullable = false, length = 10)
     private String extension;
-
-    @ManyToOne
-    @JoinColumn(name = "parent_folder")
-    private Folder folder;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
@@ -42,4 +38,6 @@ public class File {
     @CreationTimestamp
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+
 }

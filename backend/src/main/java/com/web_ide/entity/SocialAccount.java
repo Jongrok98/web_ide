@@ -13,12 +13,12 @@ import java.util.UUID;
 public class SocialAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "CHAR(36)")
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)//일단 카카오 로그인 하나만 하니까
+    @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
     @Column(nullable = false, length = 10)
@@ -32,6 +32,5 @@ public class SocialAccount {
 
     @Column(name = "token_expiry", nullable = false)
     private LocalDateTime tokenExpiry;
-
 
 }

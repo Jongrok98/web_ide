@@ -16,9 +16,8 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "CHAR(36)")
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long uuid;
 
     @Column(nullable = false, unique = true, length = 30)
     private String id; //로그인 할 떄 쓰는 id
