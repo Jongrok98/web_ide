@@ -1,6 +1,7 @@
 package com.web_ide.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,5 +33,13 @@ public class User {
     @Setter
     @Column(nullable = false, length = 20)
     private String nickname; //닉네임
+
+    @Builder
+    public User(String loginId, String pwd, String email, String nickname) {
+        this.loginId = loginId;
+        this.pwd = pwd;
+        this.email = email;
+        this.nickname = nickname;
+    }
 
 }
