@@ -23,14 +23,12 @@ public class User {
     @Column(nullable = false, unique = true, length = 30)
     private String loginId; //로그인 할 떄 쓰는 id
 
-    @Setter
     @Column(nullable = false)
     private String pwd; //비번
 
     @Column(nullable = false, unique = true)
     private String email; //이메일
 
-    @Setter
     @Column(nullable = false, length = 20)
     private String nickname; //닉네임
 
@@ -40,6 +38,22 @@ public class User {
         this.pwd = pwd;
         this.email = email;
         this.nickname = nickname;
+    }
+
+    public void updateNickname(String nickname) {
+        if(nickname != null && !nickname.isBlank()) {
+            this.nickname = nickname;
+        }else{
+            throw new IllegalArgumentException("바꾸실 닉네임을 입력해주세요");
+        }
+    }
+
+    public void updatePwd(String pwd) {
+        if(pwd != null && !pwd.isBlank()) {
+            this.pwd = pwd;
+        }else{
+            throw new IllegalArgumentException("바꿀 비밀번호를 입력해주세요");
+        }
     }
 
 }

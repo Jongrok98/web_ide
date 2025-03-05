@@ -37,8 +37,8 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
 
-        user.setNickname(requestDto.getNickname()); // 닉네임 변경
-        user.setPwd(requestDto.getPassword()); // 비밀번호 변경
+        user.updateNickname(requestDto.getNickname()); // 닉네임 변경
+        user.updatePwd(requestDto.getPassword()); // 비밀번호 변경
 
         User updatedUser = userRepository.save(user);
         return UserResponseDto.fromEntity(updatedUser);
