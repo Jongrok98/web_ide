@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserResponseDto {
     private Long id;
     private String loginId;
-    private String password;
     private String nickname;
 
     public UserResponseDto(User user) {

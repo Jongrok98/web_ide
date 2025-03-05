@@ -14,15 +14,33 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserResponseDto registerUser(UserRequestDto requestDto) {
-        // DTO → Entity 변환 후 저장
+        // 중복 아이디 , 이메일 검사
+        if (userRepository.existsByLoginId(requestDto.getLoginId())) {
+            throw new IllegalArgumentException("이미 존재하는 ID입니다.");
+        }
+        if (userRepository.existsByEmail(requestDto.getEmail())) {
+            throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
+        }
+        // DTO -> Entity 변환 후 저장
         User user = userRepository.save(requestDto.toEntity());
-        // Entity → DTO 변환 후 반환
+        // Entity -> DTO 변환 후 반환
         return UserResponseDto.fromEntity(user);
     }
 
-    public UserResponseDto getUserById(Long userId) {
+    public void deleteUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
-        return UserResponseDto.fromEntity(user);
+        userRepository.delete(user);
+    }
+
+    public UserResponseDto updateUser(Long userId, UserRequestDto requestDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+
+        user.setNickname(requestDto.getNickname()); // 닉네임 변경
+        user.setPwd(requestDto.getPassword()); // 비밀번호 변경
+
+        User updatedUser = userRepository.save(user);
+        return UserResponseDto.fromEntity(updatedUser);
     }
 }

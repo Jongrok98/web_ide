@@ -1,6 +1,7 @@
 package com.web_ide.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,5 +44,21 @@ public class Project {
     @UpdateTimestamp
     @Column(name = "updated_at" , nullable = false)
     private LocalDateTime updatedAt;
+
+    @Builder
+    public Project(String name, String description, User user,Folder rootFolder){
+        this.name = name;
+        this.user = user;
+        this.description = description;
+        this.rootFolder = rootFolder;
+    }
+
+    public void changeProjectName(String name) {
+        this.name = name;
+    }
+
+    public void changeProjectDescription(String description) {
+        this.description = description;
+    }
 
 }

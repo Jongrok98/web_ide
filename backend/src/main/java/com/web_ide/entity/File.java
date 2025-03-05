@@ -2,13 +2,13 @@ package com.web_ide.entity;
 
 import jakarta.persistence.*;
 import jakarta.websocket.server.ServerEndpoint;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -39,5 +39,10 @@ public class File {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-
+    @Builder
+    public File(String name, String extension, String filePath) {
+        this.name = name;
+        this.extension = extension;
+        this.filePath = filePath;
+    }
 }
